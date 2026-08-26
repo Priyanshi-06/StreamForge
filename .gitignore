@@ -1,0 +1,9 @@
+build/
+data/
+demo_data/
+cluster_b*/
+*.o
+*.obj
+*.exe
+.claude/
+.vscode/

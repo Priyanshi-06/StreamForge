@@ -1,0 +1,31 @@
+add_executable(test_common test_common.cpp)
+target_link_libraries(test_common PRIVATE minikafka_common)
+add_test(NAME test_common COMMAND test_common)
+
+add_executable(test_storage test_storage.cpp)
+target_link_libraries(test_storage PRIVATE minikafka_storage)
+add_test(NAME test_storage COMMAND test_storage)
+
+add_executable(test_protocol test_protocol.cpp)
+target_link_libraries(test_protocol PRIVATE minikafka_protocol)
+add_test(NAME test_protocol COMMAND test_protocol)
+
+add_executable(test_broker_core test_broker_core.cpp)
+target_link_libraries(test_broker_core PRIVATE minikafka_broker_core)
+add_test(NAME test_broker_core COMMAND test_broker_core)
+
+add_executable(test_broker_server test_broker_server.cpp)
+target_link_libraries(test_broker_server PRIVATE minikafka_broker_core)
+add_test(NAME test_broker_server COMMAND test_broker_server)
+
+add_executable(test_group_coordinator test_group_coordinator.cpp)
+target_link_libraries(test_group_coordinator PRIVATE minikafka_broker_core)
+add_test(NAME test_group_coordinator COMMAND test_group_coordinator)
+
+add_executable(test_replica_assignment test_replica_assignment.cpp)
+target_link_libraries(test_replica_assignment PRIVATE minikafka_broker_core)
+add_test(NAME test_replica_assignment COMMAND test_replica_assignment)
+
+add_executable(test_multi_broker test_multi_broker.cpp)
+target_link_libraries(test_multi_broker PRIVATE minikafka_broker_core)
+add_test(NAME test_multi_broker COMMAND test_multi_broker)
