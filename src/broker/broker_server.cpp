@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <thread>
 
+#include "common/util/logger.h"
 #include "common/util/hash.h"
 #include "protocol/messages.h"
 #include "protocol/protocol.h"
@@ -56,11 +57,12 @@ void BrokerServer::run() {
         reconciliationThread_ = std::thread(&BrokerServer::reconciliationLoop, this);
     }
 
-    std::cout << "MiniKafka broker is running.\n"
-              << "  Broker id:         " << registry_.cluster().selfBrokerId() << "\n"
-              << "  Listening on port: " << port_ << "\n"
-              << "  Storing data in:   " << dataDir_ << "\n"
-              << "  Waiting for producer/consumer connections... (Ctrl+C to stop)" << std::endl;
+    Logger::panel("MiniKafka Broker Running",
+                  {{"Broker id", std::to_string(registry_.cluster().selfBrokerId())},
+                   {"Port", std::to_string(port_)},
+                   {"Data dir", dataDir_.string()},
+                   {"Status", "Waiting for producer/consumer connections"}});
+    Logger::info("Press Ctrl+C to stop.");
 
     while (running_) {
         Socket conn = listenSocket_.accept();
@@ -84,7 +86,7 @@ void BrokerServer::logActivity(const std::string& line) {
     // different connection-handling threads are unlikely to interleave
     // mid-line on the terminal. Flushed immediately (std::endl) since this
     // is meant to be watched live, not read after the fact.
-    std::cout << line << std::endl;
+    Logger::activity(line);
     activityLog_.add(line);
 }
 

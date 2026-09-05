@@ -15,6 +15,7 @@
 
 #include "broker/broker_server.h"
 #include "common/net/socket.h"
+#include "common/util/logger.h"
 
 int main(int argc, char** argv) {
     minikafka::Socket::globalInit();
@@ -44,8 +45,8 @@ int main(int argc, char** argv) {
     if (positional.size() > 1) port = static_cast<uint16_t>(std::atoi(positional[1].c_str()));
 
     if (haveBrokerId != haveCluster) {
-        std::cerr << "--broker-id and --cluster must be given together (or neither, for a "
-                     "single-node cluster).\n";
+        Logger::error("--broker-id and --cluster must be given together (or neither, for a "
+                      "single-node cluster).");
         return 1;
     }
 
@@ -57,7 +58,7 @@ int main(int argc, char** argv) {
         minikafka::BrokerServer server(dataDir, port, cluster);
         server.run();
     } catch (const std::exception& e) {
-        std::cerr << "Broker error: " << e.what() << "\n";
+        Logger::error(std::string("Broker error: ") + e.what());
         return 1;
     }
     return 0;
