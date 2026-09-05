@@ -549,7 +549,7 @@ tests/
 - Request forwarding
 - Multi-broker topic propagation and reconciliation
 
-## Not Implemented Yet
+<!-- ## Not Implemented Yet
 
 These are intentionally left for future versions:
 
@@ -558,7 +558,7 @@ These are intentionally left for future versions:
 - Consensus protocol
 - Synchronous replication acknowledgements
 
-Those features require a consensus layer, such as Raft, and are best treated as a separate project phase.
+Those features require a consensus layer, such as Raft, and are best treated as a separate project phase. -->
 
 ---
 
@@ -579,7 +579,7 @@ The codebase is intentionally small enough to explore, but complete enough to de
 
 ---
 
-# Future Improvements
+<!-- # Future Improvements
 
 Possible future extensions:
 
@@ -591,5 +591,6 @@ Possible future extensions:
 - Replication acknowledgements
 - Metrics collection
 
----
+--- -->
+
 
